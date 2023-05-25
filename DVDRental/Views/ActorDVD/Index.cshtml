@@ -1,0 +1,44 @@
+﻿@model IEnumerable<DVDRental.Models.CastMember>
+@{
+    ViewData["Title"] = "Index";
+}
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("searchString")  
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Actor.ActorSurname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actor.ActorFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DVDTitle.title)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem=> item.Actor.ActorSurname)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem=> item.Actor.ActorFirstName)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem=> item.DVDTitle.title)
+            </th>
+        </tr>
+}
+    </tbody>
+</table>
+

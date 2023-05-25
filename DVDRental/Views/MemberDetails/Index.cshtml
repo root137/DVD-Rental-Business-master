@@ -1,0 +1,63 @@
+@model IEnumerable<DVDRental.Models.Member>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Members</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberDateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MembershipCategory.MembershipCategoryDescription )
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoanCount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberDateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MembershipCategory.MembershipCategoryDescription)
+                </td>
+                <td>
+
+                    @if (item.LoanCount > item.MembershipCategory.MembershipCategoryTotalLoans)
+                    {
+                        <p   style="color:red;"> @item.LoanCount  Too many DVDS </p>
+                    }else{
+                        <p>@item.LoanCount  </p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

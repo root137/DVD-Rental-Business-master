@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    var member = (Member)ViewData["results"];
+    var loans = (IEnumerable<Loan>)ViewData["loans"];
+}
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                MemberNumber
+            </th>
+            <th>
+               DVD Number
+            </th>
+            <th>
+               Title 
+            </th>
+            <th>
+                DVD Returned?
+            </th>
+            <th>
+                Copy Number
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var item in loans)
+            {
+                <tr>
+                    <th>
+                        @Html.DisplayFor(modelItem=> item.MemberNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem=> item.DVDCopy.DVDNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem=> item.DVDCopy.DVDTitle.title)
+                    </th>
+                    <th>
+                    @if (item.DateReturned == null)
+                    {
+                        @Html.Encode("No")
+                    }
+                    else {
+                        @Html.Encode("Yes")
+                    }
+                </th>
+                    <th>
+                        @Html.DisplayFor(modelItem=> item.CopyNumber)
+                    </th>
+                </tr>
+            }
+    </tbody>
+</table>
+
